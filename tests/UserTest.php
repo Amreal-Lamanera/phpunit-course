@@ -4,7 +4,9 @@ class UserTest extends \PHPUnit\Framework\TestCase
 {
     public function testReturnsFullName()
     {
-        require 'User.php';
+        // posso rimuovere il require perché andrò ad utilizzare la cartella
+        // source(src) tramite composer
+        //require 'User.php';
 
         $user = new User;
 
