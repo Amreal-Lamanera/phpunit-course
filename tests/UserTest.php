@@ -41,7 +41,9 @@ class UserTest extends \PHPUnit\Framework\TestCase
 
         $mock_mailer = $this->createMock(Mailer::class);
 
-        $mock_mailer->method('sendMessage')
+        $mock_mailer->expects($this->once())
+            ->method('sendMessage')
+            ->with($this->equalTo('fp@aaa.a'), $this->equalTo('Ciao'))
             ->willReturn(true);
 
         $user->setMailer($mock_mailer);
