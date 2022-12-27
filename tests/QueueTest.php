@@ -4,11 +4,11 @@ use PHPUnit\Framework\TestCase;
 
 class QueueTest extends TestCase
 {
-    protected static $queue;
+    protected $queue;
 
     protected function setUp(): void
     {
-        $this->queue =new Queue;
+        $this->queue = new Queue;
     }
 
     //eseguito alla fine del test
@@ -41,7 +41,7 @@ class QueueTest extends TestCase
 
     /**
      * aggiungo dipendenza per passare la queue già creata
-//     * @depends testNewQueueIsEmpty
+     * //     * @depends testNewQueueIsEmpty
      */
     public function testAnItemIsAddedToTheQueue()
 //    public function testAnItemIsAddedToTheQueue(Queue $queue)
@@ -59,7 +59,7 @@ class QueueTest extends TestCase
 
     /**
      * aggiungo dipendenza per passare la queue già creata
-//     * @depends testAnItemIsAddedToTheQueue
+     * //     * @depends testAnItemIsAddedToTheQueue
      */
     public function testAnItemIsRemovedFromTheQueue()
 //    public function testAnItemIsRemovedFromTheQueue(Queue $queue)
@@ -82,5 +82,26 @@ class QueueTest extends TestCase
         $this->queue->push('second');
 
         $this->assertEquals('first', $this->queue->pop());
+    }
+
+    public function testMaxNumberOfItemsCanBeAdded()
+    {
+        for ($i = 0; $i < Queue::MAX_ITEMS; $i++) {
+            $this->queue->push($i);
+        }
+
+        $this->assertEquals(Queue::MAX_ITEMS, $this->queue->getCount());
+
+        return $this->queue;
+    }
+
+    /**
+     * @depends testMaxNumberOfItemsCanBeAdded
+     */
+    public function testExceptionThrownWhenAddingAnItemToAFullQueue(Queue $queue)
+    {
+        $this->expectException(QueueException::class);
+        $this->expectExceptionMessage('Queue is full!');
+        $queue->push('cacca');
     }
 }
