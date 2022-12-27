@@ -34,4 +34,21 @@ class UserTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('Teresa', $user->first_name);
     }
+
+    public function testNotificationIsSent()
+    {
+        $user = new User;
+
+        $mock_mailer = $this->createMock(Mailer::class);
+
+        $mock_mailer->method('sendMessage')
+            ->willReturn(true);
+
+        $user->setMailer($mock_mailer);
+//        $user->setMailer(new Mailer);
+
+        $user->email = 'fp@aaa.a';
+
+        $this->assertTrue($user->notify('Ciao'));
+    }
 }
