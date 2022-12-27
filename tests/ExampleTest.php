@@ -6,7 +6,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class ExampleTest extends TestCase
+class ExampleTestFirst extends TestCase
 {
     public function testAddingTwoPlusTwoResultsInFour()
     {
