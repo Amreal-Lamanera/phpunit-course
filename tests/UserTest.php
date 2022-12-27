@@ -53,4 +53,21 @@ class UserTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($user->notify('Ciao'));
     }
+
+    public function testCannotNotifyUserWithNoEmail()
+    {
+        $user = new User;
+
+        $mock_mailer = $this->getMockBuilder(Mailer::class)
+            // stub only some of the methods from the original object
+                // in questo caso nessuno, quindi null
+            ->setMethods(null)
+            ->getMock();
+
+        $user->setMailer($mock_mailer);
+
+        $this->expectException(Exception::class);
+
+        $user->notify('Ciao');
+    }
 }
