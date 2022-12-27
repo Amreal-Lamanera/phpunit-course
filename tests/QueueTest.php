@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 
 class QueueTest extends TestCase
 {
-    protected $queue;
+    protected static $queue;
 
     protected function setUp(): void
     {
@@ -16,6 +16,18 @@ class QueueTest extends TestCase
     {
         unset($this->queue);
     }
+
+    // mentre i primi due vengono eseguiti prima e dopo l'esecuzione di ogni test
+    // questi altri due metodi vengono eseguiti prima e dopo l'esecuzione dell'intera classe
+//    public static function setUpBeforeClass(): void
+//    {
+//        static::$queue = new Queue;
+//    }
+//
+//    public static function tearDownAfterClass(): void
+//    {
+//        static::$queue = null;
+//    }
 
     public function testNewQueueIsEmpty()
     {
