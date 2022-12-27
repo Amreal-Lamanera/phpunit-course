@@ -9,20 +9,33 @@ class QueueTest extends TestCase
         $queue = new Queue;
 
         $this->assertEquals(0, $queue->getCount());
+
+        return $queue;
     }
 
-    public function testAnItemIsAddedToTheQueue()
+    /**
+     * aggiungo dipendenza per passare la queue già creata
+     * @depends testNewQueueIsEmpty
+     */
+    public function testAnItemIsAddedToTheQueue(Queue $queue)
     {
-        $queue = new Queue;
+//        $queue = new Queue;
+
         $queue->push('green');
 
         $this->assertEquals(1, $queue->getCount());
+
+        return $queue;
     }
 
-    public function testAnItemIsRemovedFromTheQueue()
+    /**
+     * aggiungo dipendenza per passare la queue già creata
+     * @depends testAnItemIsAddedToTheQueue
+     */
+    public function testAnItemIsRemovedFromTheQueue(Queue $queue)
     {
-        $queue = new Queue;
-        $queue->push('green');
+//        $queue = new Queue;
+//        $queue->push('green');
         $item = $queue->pop();
 
         $this->assertEquals(0, $queue->getCount());
