@@ -19,5 +19,3 @@ class OrderSpies
         $gateway->charge($this->amount);
     }
 }
-
-//test github
