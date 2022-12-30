@@ -2,7 +2,7 @@
 
 class MailerStatic
 {
-    public static function send(string $email, string $message)
+    public static function send(string $email, string $message): bool
     {
         if (empty($email)) {
             throw new InvalidArgumentException();
