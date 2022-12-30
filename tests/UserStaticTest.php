@@ -8,14 +8,20 @@ class UserStaticTest extends TestCase
     {
         $user = new UserStatic('a@a.a');
 
-        $mailer = $this->createMock(MailerStatic::class);
+//        $mailer = $this->createMock(MailerStatic::class);
+//
+//        $mailer->expects($this->once())
+//            ->method('send')
+//            ->willReturn(true);
+//
+//        $user->setMailer($mailer);
 
-        $mailer->expects($this->once())
-            ->method('send')
-            ->willReturn(true);
+        $user->setMailerCallable(function(){
+            echo 'mocked';
 
-        $user->setMailer($mailer);
-
+            return true;
+        });
+//
         $this->assertTrue($user->notify('CIAOOOOO'));
     }
 }
